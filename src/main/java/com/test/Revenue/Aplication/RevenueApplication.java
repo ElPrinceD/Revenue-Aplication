@@ -10,4 +10,5 @@ public class RevenueApplication {
 		SpringApplication.run(RevenueApplication.class, args);
 	}
 
+
 }

@@ -20,12 +20,18 @@ public class RevenueService {
         this.revenueRepository = revenueRepository;
     }
 
-    public Map<String, List<Revenue>> getByDate(int year) throws ParseException {
-        return revenuesByEachMonth(year);
+    public Map<String, List<Revenue>> getByDate(String start, String end) throws ParseException {
+        return revenuesByEachMonth(start, end);
 
     }
 
-    public Map<String, List<Revenue>> revenuesByEachMonth(int year){
+    public Map<String, List<Revenue>> revenuesByEachMonth(String startDate, String lastDate) throws ParseException {
+        Date start = new SimpleDateFormat("dd/MM/yyyy").parse(startDate);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(start);
+        int year = calendar.get(Calendar.YEAR);
+
+
 
         HashMap<String, List<Revenue>> monthlyRevenue = new HashMap<>();
         List<String> months = new ArrayList<>(Arrays.asList("January", "February", "March","April","May", "June", "July", "August", "September","October", "November", "December"));

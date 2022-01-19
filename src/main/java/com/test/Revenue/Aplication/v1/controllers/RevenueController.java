@@ -1,6 +1,7 @@
 package com.test.Revenue.Aplication.v1.controllers;
 
-
+import com.test.Revenue.Aplication.v1.dao.RevenueDatesRequest;
+import com.test.Revenue.Aplication.v1.dao.YearAndMonthRequest;
 import com.test.Revenue.Aplication.v1.entities.Revenue;
 import com.test.Revenue.Aplication.v1.services.RevenueService;
 import lombok.extern.slf4j.Slf4j;
@@ -29,21 +30,14 @@ public class RevenueController {
 
 
     @GetMapping
-    public Map<String, List<Revenue>> revenuesBySpecificYear(@RequestParam(required = true) int year, HttpServletResponse response, HttpServletRequest request) throws ParseException {
+    public Map<String, List<Revenue>> revenuesBySpecificYear(@RequestBody(required = true) RevenueDatesRequest datesRequest, HttpServletResponse response, HttpServletRequest request) throws ParseException {
         String requestId = request.getSession().getId();
 
-        log.info("[ " + requestId + " ] about to process request to get revenue by year " + year);
+        log.info("[ " + requestId + " ] about to process request to get revenue from " + datesRequest.getStartDate() + " to " + datesRequest.getEndDate());
 
-        return revenueService.getByDate(year);
+        return revenueService.getByDate(datesRequest.getStartDate(), datesRequest.getEndDate());
 
     }
-
-
-
-
-
-
-
 
 
 }

@@ -17,6 +17,7 @@ public interface RevenueRepository extends JpaRepository<Revenue, Long> {
     @Query("Select r from Revenue r where Year(r.createdOn)= :year")
     List<Revenue> FindAllRevenueByYear(int year);
 
+
     @Query("Select r from Revenue r where YEAR(r.createdOn)= :year and MONTH(r.createdOn) = :month")
     List<Revenue> AllBySpecificMonth(int year, int month);
 
